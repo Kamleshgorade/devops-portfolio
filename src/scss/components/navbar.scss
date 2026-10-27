@@ -1,0 +1,244 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 2rem;
+  transition: padding 0.3s ease;
+
+  @include desktop-screen {
+    padding: 1.5rem 3rem;
+  }
+}
+
+.navbar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-radius: 0.875rem;
+  transition: all 0.35s ease;
+}
+
+.navbar--scrolled .navbar__inner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px var(--shadow);
+  padding: 0.625rem 1.25rem;
+
+  @include desktop-screen {
+    padding: 0.75rem 1.75rem;
+  }
+}
+
+.navbar__logo {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+
+  span {
+    color: var(--accent);
+  }
+}
+
+.navbar__links {
+  display: none;
+  list-style: none;
+  gap: 0.125rem;
+  margin: 0;
+  padding: 0;
+
+  @include desktop-screen {
+    display: flex;
+  }
+}
+
+.navbar__link {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+    background: var(--accent-muted);
+  }
+
+  &--active {
+    color: var(--accent);
+    background: var(--accent-muted);
+  }
+}
+
+.navbar__actions {
+  display: none;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+
+  @include desktop-screen {
+    display: flex;
+  }
+}
+
+.navbar__lang {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--bg-card);
+  padding: 2px;
+}
+
+.navbar__lang-btn {
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0.625rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &--active {
+    background: var(--accent);
+    color: #fff;
+  }
+}
+
+.navbar__lang--mobile {
+  align-self: flex-start;
+  margin-bottom: 0.25rem;
+}
+
+.navbar__theme-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-muted);
+  }
+}
+
+.navbar__cv-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 2rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.825rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+}
+
+.navbar__burger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0.25rem;
+  flex-shrink: 0;
+
+  @include desktop-screen {
+    display: none;
+  }
+}
+
+.navbar__mobile {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 1rem;
+  right: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  box-shadow: 0 8px 32px var(--shadow);
+  padding: 1rem;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    list-style: none;
+    margin: 0 0 0.75rem;
+    padding: 0;
+  }
+
+  .navbar__link {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.925rem;
+  }
+}
+
+.navbar__mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+
+  button,
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.625rem 0.875rem;
+    border-radius: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--accent-muted);
+      color: var(--accent);
+    }
+  }
+}
+
+// utilitaires conservés
+.hidden { display: none; }
+.flex { display: flex; }

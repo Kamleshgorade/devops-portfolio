@@ -1,0 +1,115 @@
+import { useState, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { toast, ToastContainer } from 'react-toastify'
+import { FiMail, FiSend, FiGithub, FiLinkedin } from 'react-icons/fi'
+import 'react-toastify/dist/ReactToastify.css'
+import PageHero from '../components/PageHero'
+import ValueProps from '../components/ValueProps'
+import { useT } from '../i18n/ui'
+
+const SOCIAL_LINKS = [
+  {
+    icon: FiMail,
+    label: 'kamleshgorade1@gmail.com',
+    href: 'mailto:kamleshgorade1@gmail.com'
+  },
+  {
+    icon: FiGithub,
+    label: 'github.com/goradekamlesh',
+    href: 'https://github.com/goradekamlesh'
+  },
+  {
+    icon: FiLinkedin,
+    label: 'in/kamleshgorade',
+    href: 'https://www.linkedin.com/in/kamleshgorade'
+  },
+]
+
+const Contact = () => {
+  const formRef = useRef()
+  const t = useT()
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [loading, setLoading] = useState(false)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const subject = encodeURIComponent('Portfolio message from ' + form.name)
+      const body = encodeURIComponent(form.message + '\n\nFrom: ' + form.name + ' (' + form.email + ')')
+      window.location.href = `mailto:kamleshgorade1@gmail.com?subject=${subject}&body=${body}`
+      setLoading(false)
+      toast.success(t('contact.toast.success'))
+      setForm({ name: '', email: '', message: '' })
+    } catch {
+      setLoading(false)
+      toast.error(t('contact.toast.error'))
+    }
+  }
+
+  return (
+    <>
+      <PageHero
+        badge={t('page.contact.badge')}
+        title={t('page.contact.title')}
+        highlight={t('page.contact.highlight')}
+      />
+      <section id='contact'>
+        <div className='contact-layout'>
+          <motion.div
+            className='contact-info'
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className='contact-info__text'>{t('page.contact.desc')}</p>
+            <div className='contact-info__links'>
+              {SOCIAL_LINKS.map((s) => (
+                <a key={s.label} href={s.href} target='_blank' rel='noreferrer' className='contact-info__link'>
+                  <s.icon size={18} />
+                  <span>{s.label}</span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.form
+            ref={formRef}
+            className='contact-form'
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className='contact-form__field'>
+              <label htmlFor='cf-name'>{t('contact.form.name')}</label>
+              <input id='cf-name' type='text' name='name' value={form.name} onChange={handleChange} placeholder={t('contact.form.namePlaceholder')} required />
+            </div>
+            <div className='contact-form__field'>
+              <label htmlFor='cf-email'>{t('contact.form.email')}</label>
+              <input id='cf-email' type='email' name='email' value={form.email} onChange={handleChange} placeholder={t('contact.form.emailPlaceholder')} required />
+            </div>
+            <div className='contact-form__field'>
+              <label htmlFor='cf-message'>{t('contact.form.message')}</label>
+              <textarea id='cf-message' name='message' rows={6} value={form.message} onChange={handleChange} placeholder={t('contact.form.messagePlaceholder')} required />
+            </div>
+            <button type='submit' className='btn btn--primary' disabled={loading}>
+              {loading ? t('contact.form.sending') : <><FiSend size={15} /> {t('contact.form.send')}</>}
+            </button>
+          </motion.form>
+        </div>
+      </section>
+      <ValueProps />
+      <ToastContainer position='bottom-center' theme='colored' autoClose={5000} />
+    </>
+  )
+}
+
+export default Contact
