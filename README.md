@@ -2,7 +2,6 @@
 
 Personal portfolio of Kamlesh Gorade, a DevOps engineer. React 18, React Router, Framer Motion, SCSS.
 
-Based on [tristan-greffe/portfolio](https://github.com/tristan-greffe/portfolio) (MIT License). Content, assets and contact flow have been replaced.
 
 ## Run locally
 
